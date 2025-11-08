@@ -1,4 +1,9 @@
+using FlightApplication._8assignment;
+using FlightApplication.Interfaces;
+using FlightDomain.Interfaces;
 using FlightInfrastructure.Database;
+using FlightDomain.Models;
+using FlightInfrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,21 +12,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<IPlaneRepository, PlaneRepository>();
+builder.Services.AddScoped<IVisitor, ConcretePlaneVisitor>();
+builder.Services.AddScoped<IFlight, Flight>();
 builder.Services.AddDbContext<FlightDbContext>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 var app = builder.Build();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials()
-              .WithOrigins("http://localhost:3000");
-    });
-});
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAll", policy =>
+//    {
+//        policy.AllowAnyHeader()
+//              .AllowAnyMethod()
+//              .AllowCredentials()
+//              .WithOrigins("http://localhost:3000");
+//    });
+//});
 
 
 app.UseCors("AllowAll");

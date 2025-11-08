@@ -3,9 +3,9 @@ namespace FlightDomain.Models
 {
     public class Plane
     {
-        public Guid Id { get; }
-        public string? Model { get; }
-        public int Seats { get; }
-        public int BookedSeats { get; set; }
+        public Guid Id { get; set; }
+        public string? Model { get; init; }
+        public int Seats { get; init;  }
+        public ICollection<Flight> flights { get; set; } = new List<Flight>();
     }
 }

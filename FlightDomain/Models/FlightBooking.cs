@@ -9,6 +9,6 @@
         public decimal PricePaid { get; set; }
         public decimal PriceTotal { get; set; }
         public string Status { get; set; } = "Unknown";
-
+        public Flight flight { get; set; } = null!;
     }
 }
