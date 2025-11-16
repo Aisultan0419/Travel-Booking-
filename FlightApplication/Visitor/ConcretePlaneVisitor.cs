@@ -1,7 +1,7 @@
 ﻿using FlightApplication.DTO;
-using FlightApplication.Interfaces;
 using FlightDomain.Models;
 using FlightDomain.Interfaces;
+using FlightApplication.Interfaces.Repo;
 namespace FlightApplication._8assignment
 {
     public class ConcretePlaneVisitor : IVisitor

@@ -10,5 +10,7 @@
         public decimal PriceTotal { get; set; }
         public string Status { get; set; } = "Unknown";
         public Flight flight { get; set; } = null!;
+
+        public User? user { get; set; } 
     }
 }

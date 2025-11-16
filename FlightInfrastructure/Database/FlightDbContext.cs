@@ -11,6 +11,7 @@ namespace FlightInfrastructure.Database
         public DbSet<Flight> Flights { get; set; }
         public DbSet<FlightBooking> FlightBooks { get; set; }
         public DbSet<Plane> Planes { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,6 +27,12 @@ namespace FlightInfrastructure.Database
                 .HasMany(p => p.flights)
                 .WithOne(f => f.plane)
                 .HasForeignKey(f => f.PlaneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+                .HasMany(a => a.flightBookings)
+                .WithOne(a => a.user)
+                .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
